@@ -220,7 +220,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
               cursor: _.showControls.value ? SystemMouseCursors.basic : SystemMouseCursors.none,
               onHover: (___) {
                 //customDebugPrint(___.delta);
-                print("===>___.delta=${___.delta}");
                 if (_.mouseMoveInitial < const Offset(75, 75).distance) {
                   _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
                 } else {
@@ -546,7 +545,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
-    print("build video controls");
     return GestureDetector(
         onPanStart: UniversalPlatform.isDesktop ? (__) => windowDrag(_) : null,
         onTap: () => onTap(_),
@@ -621,7 +619,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
                   alignment: Alignment.bottomRight,
                   child: Builder(
                     builder: (context) {
-                      print("===>_.showControls.value=${_.showControls.value},_.lockedControls.value=${_.lockedControls.value}");
                       return AnimatedOpacity(
                         opacity: !(_.showControls.value && _.lockedControls.value) ? 0 : 1,
                         duration: _.durations.controlsDuration,
