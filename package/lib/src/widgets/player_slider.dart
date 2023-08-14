@@ -13,56 +13,60 @@ class PlayerSlider extends StatelessWidget {
         LayoutBuilder(builder: (ctx, constraints) {
           return RxBuilder(
             //observables: [_.buffered, _.duration],
-            (__) {
+                (__) {
+              if (_.bufferedPercent.value.isNaN || _.bufferedPercent.value.isInfinite) {
+                _.bufferedPercent.value = 0;
+              }
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 color: Colors.white30,
                 width: constraints.maxWidth * _.bufferedPercent.value,
-                height: 3,
+                height: 1,
               );
             },
           );
         }),
         RxBuilder(
           //observables: [_.sliderPosition, _.duration],
-          (__) {
-            final double value =
-                _.sliderPosition.value.inMilliseconds.toDouble();
+              (__) {
+            final double value = _.sliderPosition.value.inMilliseconds.toDouble();
             final double max = _.duration.value.inMilliseconds.toDouble();
             if (value > max || max <= 0) {
               return Container();
             }
-            return Container(
-              constraints: const BoxConstraints(
-                maxHeight: 30,
-              ),
-              padding: const EdgeInsets.only(bottom: 8),
-              alignment: Alignment.center,
-              child: SliderTheme(
-                data: SliderThemeData(
-                  trackShape: MSliderTrackShape(),
-                  thumbColor: _.colorTheme,
-                  activeTrackColor: _.colorTheme,
-                  trackHeight: 10,
-                  thumbShape:
-                      const RoundSliderThumbShape(enabledThumbRadius: 4.0),
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Container(
+                constraints: const BoxConstraints(
+                  maxHeight: 20,
                 ),
-                child: Slider(
-                  min: 0,
-                  divisions: null,
-                  value: value,
-                  onChangeStart: (v) {
-                    _.onChangedSliderStart();
-                  },
-                  onChangeEnd: (v) {
-                    _.onChangedSliderEnd();
-                    _.seekTo(
-                      Duration(milliseconds: v.floor()),
-                    );
-                  },
-                  label: printDuration(_.sliderPosition.value),
-                  max: max,
-                  onChanged: _.onChangedSlider,
+                // padding: const EdgeInsets.only(bottom: 8),
+                alignment: Alignment.center,
+                child: SliderTheme(
+                  data: SliderThemeData(
+                    trackShape: MSliderTrackShape(),
+                    thumbColor: _.colorTheme,
+                    activeTrackColor: _.colorTheme,
+                    trackHeight: 10,
+                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 4.0),
+                  ),
+                  child: Slider(
+                    min: 0,
+                    divisions: null,
+                    value: value,
+                    onChangeStart: (v) {
+                      _.onChangedSliderStart();
+                    },
+                    onChangeEnd: (v) {
+                      _.onChangedSliderEnd();
+                      _.seekTo(
+                        Duration(milliseconds: v.floor()),
+                      );
+                    },
+                    label: printDuration(_.sliderPosition.value),
+                    max: max,
+                    onChanged: _.onChangedSlider,
+                  ),
                 ),
               ),
             );
@@ -84,8 +88,7 @@ class MSliderTrackShape extends RoundedRectSliderTrackShape {
   }) {
     const double trackHeight = 1;
     final double trackLeft = offset.dx;
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2 + 4;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2 + 4;
     final double trackWidth = parentBox.size.width;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }

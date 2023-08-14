@@ -254,7 +254,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
       if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
         RxBuilder(
           //observables: [_.showControls],
-          (__) => IgnorePointer(
+              (__) => IgnorePointer(
             ignoring: true,
             child: VideoCoreForwardAndRewind(
               responsive: widget.responsive,
@@ -268,7 +268,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
       if (_.enabledOverlays.volume)
         RxBuilder(
           //observables: [_.volume],
-          (__) => AnimatedOpacity(
+              (__) => AnimatedOpacity(
             duration: _.durations.volumeOverlayDuration,
             opacity: _.showVolumeStatus.value ? 1 : 0,
             child: Align(
@@ -306,7 +306,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
       if (_.enabledOverlays.brightness)
         RxBuilder(
           //observables: [_.volume],
-          (__) => AnimatedOpacity(
+              (__) => AnimatedOpacity(
             duration: _.durations.brightnessOverlayDuration,
             opacity: _.showBrightnessStatus.value ? 1 : 0,
             child: Align(
@@ -325,7 +325,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                         Container(color: Colors.black38),
                         Container(
                           height:
-                              _.brightness.value * widget.responsive.height / 2,
+                          _.brightness.value * widget.responsive.height / 2,
                           color: Colors.blue,
                         ),
                         Container(
@@ -345,7 +345,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
       RxBuilder(
         //observables: [_.showSwipeDuration],
         //observables: [_.swipeDuration],
-        (__) => Align(
+            (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
             duration: _.durations.seekDuration,
@@ -371,7 +371,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
       RxBuilder(
         //observables: [_.showSwipeDuration],
         //observables: [_.swipeDuration],
-        (__) => Align(
+            (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
             duration: _.durations.videoFitOverlayDuration,
@@ -394,31 +394,31 @@ class _ControlsContainerState extends State<ControlsContainer> {
         ),
       ),
       RxBuilder(
-          //observables: [_.showControls],
-          (__) {
-        _.dataStatus.status.value;
-        if (_.dataStatus.error) {
-          return Center(
-              child: Text(
-            _.errorText!,
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ));
-        } else {
-          return Container();
-        }
-      }),
+        //observables: [_.showControls],
+              (__) {
+            _.dataStatus.status.value;
+            if (_.dataStatus.error) {
+              return Center(
+                  child: Text(
+                    _.errorText!,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ));
+            } else {
+              return Container();
+            }
+          }),
       RxBuilder(
-          //observables: [_.showControls],
-          (__) {
-        _.dataStatus.status.value;
-        if (_.dataStatus.loading || _.isBuffering.value) {
-          return Center(
-            child: _.loadingWidget,
-          );
-        } else {
-          return Container();
-        }
-      }),
+        //observables: [_.showControls],
+              (__) {
+            _.dataStatus.status.value;
+            if (_.dataStatus.loading || _.isBuffering.value) {
+              return Center(
+                child: _.loadingWidget,
+              );
+            } else {
+              return Container();
+            }
+          }),
     ]);
   }
 
@@ -471,7 +471,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         final Offset delta = details.delta;
         if (details.localPosition.dx > widget.responsive.width * 0.1 &&
             ((widget.responsive.width - details.localPosition.dx) >
-                    widget.responsive.width * 0.1 &&
+                widget.responsive.width * 0.1 &&
                 !gettingNotification)) {
           _forwardDragStart(position, _);
           _dragInitialDelta = delta;
@@ -575,29 +575,29 @@ class _ControlsContainerState extends State<ControlsContainer> {
         onPanStart: UniversalPlatform.isDesktop ? (__) => windowDrag(_) : null,
         onTap: () => onTap(_),
         onLongPressStart:
-            (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
-                ? (details) {
-                    if (_.customCallbacks.onLongPressStartedCallback != null) {
-                      _.customCallbacks.onLongPressStartedCallback!(_);
-                    } else {
-                      _.setPlaybackSpeed(2);
-                    }
-                  }
-                : null,
+        (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
+            ? (details) {
+          if (_.customCallbacks.onLongPressStartedCallback != null) {
+            _.customCallbacks.onLongPressStartedCallback!(_);
+          } else {
+            _.setPlaybackSpeed(2);
+          }
+        }
+            : null,
         onLongPressEnd:
-            (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
-                ? (details) {
-                    if (_.customCallbacks.onLongPressEndedCallback != null) {
-                      _.customCallbacks.onLongPressEndedCallback!(_);
-                    } else {
-                      _.setPlaybackSpeed(1);
-                    }
-                  }
-                : null,
+        (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
+            ? (details) {
+          if (_.customCallbacks.onLongPressEndedCallback != null) {
+            _.customCallbacks.onLongPressEndedCallback!(_);
+          } else {
+            _.setPlaybackSpeed(1);
+          }
+        }
+            : null,
         onHorizontalDragUpdate:
-            (_.mobileControls && !widget.preventVerticalDrag)
-                ? (details) => onHorizontalDragUpdate(details, _)
-                : null,
+        (_.mobileControls && !widget.preventVerticalDrag)
+            ? (details) => onHorizontalDragUpdate(details, _)
+            : null,
         onHorizontalDragEnd: (_.mobileControls && !widget.preventVerticalDrag)
             ? (details) => onHorizontalDragEnd(details, _)
             : null,
@@ -647,11 +647,11 @@ class _ControlsContainerState extends State<ControlsContainer> {
                   ),
                 AnimatedOpacity(
                   opacity:
-                      (!_.showControls.value || _.lockedControls.value) ? 0 : 1,
+                  (!_.showControls.value || _.lockedControls.value) ? 0 : 1,
                   duration: _.durations.controlsDuration,
                   child: IgnorePointer(
                       ignoring:
-                          (!_.showControls.value || _.lockedControls.value),
+                      (!_.showControls.value || _.lockedControls.value),
                       child: widget.child),
                 ),
                 Align(
@@ -663,7 +663,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                     duration: _.durations.controlsDuration,
                     child: IgnorePointer(
                         ignoring:
-                            !(_.showControls.value && _.lockedControls.value),
+                        !(_.showControls.value && _.lockedControls.value),
                         child: LockButton(
                           responsive: _.responsive,
                         )),
