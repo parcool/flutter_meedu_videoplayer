@@ -216,21 +216,18 @@ class _ControlsContainerState extends State<ControlsContainer> {
     return Stack(children: [
       RxBuilder((__) {
         if (!_.mobileControls) {
-          return Container(
-            color: Colors.lightGreen,
-            child: MouseRegion(
-                cursor: _.showControls.value ? SystemMouseCursors.basic : SystemMouseCursors.none,
-                onHover: (___) {
-                  //customDebugPrint(___.delta);
-                  print("===>___.delta=${___.delta}");
-                  if (_.mouseMoveInitial < const Offset(75, 75).distance) {
-                    _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
-                  } else {
-                    _.controls = true;
-                  }
-                },
-                child: videoControls(_, context)),
-          );
+          return MouseRegion(
+              cursor: _.showControls.value ? SystemMouseCursors.basic : SystemMouseCursors.none,
+              onHover: (___) {
+                //customDebugPrint(___.delta);
+                print("===>___.delta=${___.delta}");
+                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
+                } else {
+                  _.controls = true;
+                }
+              },
+              child: videoControls(_, context));
         } else {
           return videoControls(_, context);
         }
