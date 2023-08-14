@@ -703,11 +703,13 @@ class MeeduPlayerController {
     _looping = looping;
   }
 
+  //todo: 1
   void onChangedSliderStart() {
     _isSliderMoving = true;
     controls = true;
   }
 
+  //todo:2
   onChangedSlider(double v) {
     _sliderPosition.value = Duration(milliseconds: v.floor());
     controls = true;
@@ -852,6 +854,7 @@ class MeeduPlayerController {
     }
   }
 
+  /// todo:3
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
     // customDebugPrint(

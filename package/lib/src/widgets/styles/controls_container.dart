@@ -67,6 +67,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
     controller.showSwipeDuration.value = true;
   }
 
+  ///todo:4
   void tappedOnce(MeeduPlayerController _, bool secondTap) {
     if (!secondTap) {
       //   // _tappedOnce?.cancel();
@@ -240,6 +241,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                   : SystemMouseCursors.none,
               onHover: (___) {
                 //customDebugPrint(___.delta);
+                print("===>___.delta=${___.delta}");
                 if (_.mouseMoveInitial < const Offset(75, 75).distance) {
                   _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
                 } else {
@@ -437,6 +439,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
     }
   }
 
+  /// todo:5
   void onTap(MeeduPlayerController _) {
     if (!_.mobileControls) {
       if (tappedTwice) {
@@ -571,6 +574,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
+    print("build video controls");
     return GestureDetector(
         onPanStart: UniversalPlatform.isDesktop ? (__) => windowDrag(_) : null,
         onTap: () => onTap(_),
@@ -656,18 +660,21 @@ class _ControlsContainerState extends State<ControlsContainer> {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: AnimatedOpacity(
-                    opacity: !(_.showControls.value && _.lockedControls.value)
-                        ? 0
-                        : 1,
-                    duration: _.durations.controlsDuration,
-                    child: IgnorePointer(
-                        ignoring:
-                        !(_.showControls.value && _.lockedControls.value),
-                        child: LockButton(
-                          responsive: _.responsive,
-                        )),
-                  ),
+                  child: Builder(builder: (context) {
+                    print("===>_.showControls.value=${_.showControls.value},_.lockedControls.value=${_.lockedControls.value}");
+                    return AnimatedOpacity(
+                      opacity: !(_.showControls.value && _.lockedControls.value)
+                          ? 0
+                          : 1,
+                      duration: _.durations.controlsDuration,
+                      child: IgnorePointer(
+                          ignoring:
+                          !(_.showControls.value && _.lockedControls.value),
+                          child: LockButton(
+                            responsive: _.responsive,
+                          )),
+                    );
+                  },),
                 ),
               ],
             )));

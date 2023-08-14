@@ -142,6 +142,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    print("==> build MeeduVideoPlayer");
     return CallbackShortcuts(
       bindings: activatorsToCallBacks(widget.controller, context),
       child: Focus(
@@ -185,6 +186,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     if (widget.customCaptionView != null) {
                       _.customCaptionView = widget.customCaptionView;
                     }
+                    print("===> build MeeduVideoPlayer 2");
                     return ExcludeFocus(
                       excluding: _.excludeFocus,
                       child: Stack(
