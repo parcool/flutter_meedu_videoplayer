@@ -89,6 +89,7 @@ class MeeduPlayerController {
   final Rx<bool> _pipAvailable = false.obs;
 
   final Rx<bool> _showControls = true.obs;
+  final Rx<bool> _alwaysShowControls = false.obs;
   final Rx<bool> _showSwipeDuration = false.obs;
   final Rx<bool> _showVolumeStatus = false.obs;
   final Rx<bool> _showBrightnessStatus = false.obs;
@@ -159,6 +160,7 @@ class MeeduPlayerController {
 
   /// [showControls] is true if the player controls are visible
   Rx<bool> get showControls => _showControls;
+  Rx<bool> get alwaysShowControls => _alwaysShowControls;
   Stream<bool> get onShowControlsChanged => _showControls.stream;
 
   /// [showSwipeDuration] is true if the player controls are visible
@@ -829,6 +831,25 @@ class MeeduPlayerController {
     }
   }
 
+
+  void setAlwaysShowControls(bool value) {
+    if (fullscreen.value) {
+      //customDebugPrint("Closed");
+      screenManager.setOverlays(value);
+    }
+    _alwaysShowControls.value = value;
+    if (value) {
+      _timer?.cancel();
+    } else {
+      if (autoHideControls) {
+        _hideTaskControls();
+      } else {
+        // DO NOTHING
+      }
+    }
+  }
+
+
   /// show or hide the player controls
   set controls(bool visible) {
     // if (!UniversalPlatform.isDesktopOrWeb && visible && lockedControls.value) {
@@ -843,7 +864,7 @@ class MeeduPlayerController {
     //customDebugPrint(visible);
     _showControls.value = visible;
     _timer?.cancel();
-    if (visible && autoHideControls) {
+    if (visible && autoHideControls && !alwaysShowControls.value) {
       _hideTaskControls();
     }
   }
