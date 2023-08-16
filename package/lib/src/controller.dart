@@ -51,6 +51,8 @@ class MeeduPlayerController {
   /// use this class to disable controls in the player
   EnabledControls enabledControls;
 
+  final double? mouseMoveThreshold;
+
   /// the playerStatus to notify the player events like paused,playing or stopped
   /// [playerStatus] has a [status] observable
   final MeeduPlayerStatus playerStatus = MeeduPlayerStatus();
@@ -304,6 +306,7 @@ class MeeduPlayerController {
   /// [manageWakeLock] if the player should use wakelock
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
+    this.mouseMoveThreshold,
     this.screenManager = const ScreenManager(),
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,

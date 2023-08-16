@@ -220,7 +220,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
               cursor: _.showControls.value ? SystemMouseCursors.basic : SystemMouseCursors.none,
               onHover: (___) {
                 //customDebugPrint(___.delta);
-                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                if (_.mouseMoveInitial < Offset(_.mouseMoveThreshold ?? 75, _.mouseMoveThreshold ?? 75).distance) {
                   _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
                 } else {
                   _.controls = true;
