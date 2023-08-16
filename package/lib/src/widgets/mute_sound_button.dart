@@ -4,8 +4,9 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 class MuteSoundButton extends StatelessWidget {
   final Responsive responsive;
   final EdgeInsets? customPadding;
+  final double? size;
 
-  const MuteSoundButton({Key? key, required this.responsive, this.customPadding}) : super(key: key);
+  const MuteSoundButton({Key? key, required this.responsive, this.customPadding, this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class MuteSoundButton extends StatelessWidget {
 
           return PlayerButton(
             // size: responsive.buttonSize(),
-            size: 30,
+            size: size ?? 30,
             circle: false,
             backgroundColor: Colors.transparent,
             iconColor: Colors.white,
