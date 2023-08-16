@@ -3,7 +3,9 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class MuteSoundButton extends StatelessWidget {
   final Responsive responsive;
-  const MuteSoundButton({Key? key, required this.responsive}) : super(key: key);
+  final EdgeInsets? customPadding;
+
+  const MuteSoundButton({Key? key, required this.responsive, this.customPadding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class MuteSoundButton extends StatelessWidget {
             iconColor: Colors.white,
             iconPath: iconPath,
             customIcon: customIcon,
+            customPadding: customPadding,
             onPressed: () {
               _.setMute(!_.mute.value);
             },

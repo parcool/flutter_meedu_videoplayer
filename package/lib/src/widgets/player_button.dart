@@ -8,6 +8,7 @@ class PlayerButton extends StatelessWidget {
   final Color backgroundColor, iconColor;
   final bool circle;
   final Widget? customIcon;
+  final EdgeInsets? customPadding;
 
   const PlayerButton({
     Key? key,
@@ -17,7 +18,7 @@ class PlayerButton extends StatelessWidget {
     this.circle = true,
     this.backgroundColor = Colors.white54,
     this.iconColor = Colors.black,
-    this.customIcon,
+    this.customIcon, this.customPadding,
   }) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class PlayerButton extends StatelessWidget {
           Container(
             width: size,
             height: size,
-            padding: EdgeInsets.all(size * 0.25),
+            padding: customPadding ?? EdgeInsets.all(size * 0.25),
             decoration: BoxDecoration(
               color: backgroundColor,
               shape: circle ? BoxShape.circle : BoxShape.rectangle,

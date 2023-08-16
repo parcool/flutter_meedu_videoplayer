@@ -105,9 +105,9 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                               child: RxBuilder(
                                 (__) => Row(
                                   children: [
-                                    Expanded(
-                                        child: MuteSoundButton(
-                                            responsive: responsive)),
+                                    MuteSoundButton(
+                                      customPadding: const EdgeInsets.symmetric(horizontal: 4),
+                                        responsive: responsive),
                                     !controller.mute.value
                                         ? Expanded(
                                             flex: 2,
